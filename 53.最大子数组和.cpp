@@ -6,6 +6,16 @@ class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
         int max_sum = INT_MIN;
+        int pre_sum = 0;
+        for (int num : nums) {
+            pre_sum += num;
+            max_sum = max(pre_sum, max_sum);
+
+            if (pre_sum < 0) {
+                pre_sum = 0;
+            }
+        }
+        return max_sum;
     }
 };
 
