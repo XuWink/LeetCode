@@ -18,9 +18,55 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        
+        if (head == nullptr) {
+            return nullptr;
+        }
+
+        Node* current = head;
+
+        // 复制结点
+        while(current != nullptr) {
+            Node* temp = new Node(current->val);
+            Node* next = current->next;
+            current->next = temp;
+            temp->next = next;
+            current = next;
+        }
+
+        // 复制随机指针
+        current = head;
+        while(current != nullptr) {
+            if (current->random != nullptr) {
+                current->next->random = current->random->next;
+            }
+            current = current->next->next;
+        }
+
+        // 剥离
+        Node* dummy = new Node(0);
+        Node* p = dummy;
+        current = head;
+        while(current != nullptr) {
+            Node* newNode = current->next;
+            p->next = newNode;
+            p = newNode;
+            current->next = newNode->next;
+            current = current->next;
+        }
+
+        Node* result = dummy->next;
+        delete dummy;
+        return result;
+
     }
 };
+
+/*
+思路：
+    先复制一遍原有结点
+    新节点的random就是原有节点的random->next
+    剥离新节点
+*/
 
 /*
 给你一个长度为 n 的链表，每个节点包含一个额外增加的随机指针 random ，该指针可以指向链表中的任何节点或空节点。
