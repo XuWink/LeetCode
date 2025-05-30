@@ -1,12 +1,42 @@
 #include <iostream>
 #include <vector>
+#include <unordered_set>
+#include <unordered_map>
 
 using namespace std;
 
 class Solution {
 public:
+    // int findDuplicate(vector<int>& nums) {
+    //     std::unordered_map<int, int> umap;
+    //     for (const int& num : nums) {
+    //         if (umap.find(num) != umap.end()) {
+    //             umap[num] += 1;
+    //         } else {
+    //             umap.insert({num, 1})
+    //         }
+    //     }
+    //     int result = -1;
+    //     for (auto item : umap) {
+    //         if (item.second == 2) {
+    //             result = item.first;
+    //             break;
+    //         }
+    //     }
+    //     return  result;
+    // }
+
     int findDuplicate(vector<int>& nums) {
-        
+        unordered_set<int> uset;
+        for(int num : nums){
+            if(uset.find(num) != uset.end()){
+                return num;
+            }else{
+                uset.insert(num);
+            }
+        }
+
+        return -1;
     }
 };
 
