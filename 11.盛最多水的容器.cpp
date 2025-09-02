@@ -4,54 +4,52 @@
 using namespace std;
 
 class Solution {
-public:
-	// 暴力解法
-	int maxArea1(vector<int>& height) {
+  public:
+    // 暴力解法
+    int maxArea1(vector<int> & height) {
         int max_water = 0;
-		for(int i=0; i<height.size()-1; ++i){
-			for(int j=1; j<height.size(); ++j){
-				
-				int temp = (j-i)*min(height[j], height[i]);
-				max_water = max(max_water, temp);
-			}			
-		}
-		return max_water;
+        for (int i = 0; i < height.size() - 1; ++i) {
+            for (int j = 1; j < height.size(); ++j) {
+                int temp  = (j - i) * min(height[j], height[i]);
+                max_water = max(max_water, temp);
+            }
+        }
+        return max_water;
     }
 
-	/*
+    /*
 	使用两个指针，分别指向数组的左右两端。
 	计算当前容器的容量，并更新最大值。
 	移动较短的线对应的指针（因为容量由较短的线决定，移动较长的线不会使容量变大）。
 	时间复杂度为 O(n)。
 	*/
-    int maxArea(vector<int>& height) {
-		int left = 0;
-		int right = height.size()-1;
-		int max_water = 0;
-		
-		while(left < right){
-			int temp = (right - left) * min(height[left], height[right]);
-			max_water = max(max_water, temp);
-			
-			if(height[left] <= height[right]){
-				left += 1;
-			}else{
-				right -= 1;
-			}
-		}
-		
+    int maxArea(vector<int> & height) {
+        int left      = 0;
+        int right     = height.size() - 1;
+        int max_water = 0;
+
+        while (left < right) {
+            int temp  = (right - left) * min(height[left], height[right]);
+            max_water = max(max_water, temp);
+
+            if (height[left] <= height[right]) {
+                left += 1;
+            } else {
+                right -= 1;
+            }
+        }
+
         return max_water;
     }
 };
 
-int main(){
-	
-	Solution sol;
-	vector<int> height = {1,8,6,2,5,4,8,3,7};
-	int result = sol.maxArea(height);
-	
-	std::cout<<"result = " <<result<<std::endl;	
-	return 0;
+int main() {
+    Solution    sol;
+    vector<int> height = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
+    int         result = sol.maxArea(height);
+
+    std::cout << "result = " << result << std::endl;
+    return 0;
 }
 
 /*
