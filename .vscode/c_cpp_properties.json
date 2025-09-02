@@ -12,8 +12,8 @@
             ],
             "cStandard": "c17",
             "cppStandard": "gnu++17",
-            "intelliSenseMode": "windows-gcc-x64",
-            "compilerPath": "D:/xuwenke/study_cpp/mingw64/bin/g++.exe"
+            "intelliSenseMode": "linux-gcc-x64",
+            "compilerPath": "/usr/bin/gcc"
         }
     ],
     "version": 4

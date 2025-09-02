@@ -2,37 +2,27 @@
 
 #include <iostream>
 
-class HeapObj
-{
+class HeapObj {
 
-public:
-    static HeapObj *create()
-    {
-        return new HeapObj();
-    }
+  public:
+    static HeapObj * create() { return new HeapObj(); }
 
-    void destory()
-    {
-        delete this;
-    }
+    void destory() { delete this; }
 
-    void doSomething()
-    {
-        std::cout << "只能在堆上创建对象，不能在栈上创建对象" << std::endl;
-    }
+    void doSomething() { std::cout << "只能在堆上创建对象，不能在栈上创建对象" << std::endl; }
 
-private:
+  private:
     // 私有构造函数和析构函数，禁止栈上分配
     HeapObj() {}
+
     ~HeapObj() {}
 
-    HeapObj(const HeapObj &) = delete;
-    HeapObj &operator=(const HeapObj &) = delete;
+    HeapObj(const HeapObj &)             = delete;
+    HeapObj & operator=(const HeapObj &) = delete;
 };
 
-int main()
-{
-    HeapObj *obj = HeapObj::create();
+int main() {
+    HeapObj * obj = HeapObj::create();
     obj->doSomething();
     obj->destory();
 
